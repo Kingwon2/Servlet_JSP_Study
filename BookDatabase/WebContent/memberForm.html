@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>회원 가입창</title>
+<script type="text/javascript">
+function fn_sendMember(){
+   var frmMember=document.frmMember;
+   var price=frmMember.price.value;
+   var publisher=frmMember.publisher.value;
+   var name=frmMember.name.value;
+   var id=frmMember.id.value;
+   if(id.length==0 ||id==""){
+      alert("도서번호는 필수입니다.");}
+   else{
+	   frmMember.method="get";
+	   frmMember.action="member";
+	   frmMember.submit()
+   }
+   
+  
+}
+</script>
+</head>
+<body>
+  <form name="frmMember">
+  <table>
+	   <th>도서 등록창</th>
+	   <tr>
+		<td>번호</td>
+		<td><input type="text" name="id"></td>
+	  </tr>
+	  <tr>
+		<td>도서명</td>
+		<td><input type="text" name="name"></td>
+	  </tr>
+	  <tr>
+		<td>출판사</td>
+		<td><input type="text" name="publisher"></td>
+	  </tr>
+	  <tr>
+		<td>가격</td>
+		<td><input type="text" name="price"></td>
+  </table>
+   <input type="button" value="등록하기" onclick="fn_sendMember()">
+   <input type="reset" value="다시입력">
+   <input  type="hidden" name="command" value="addMember" />	
+  </form>
+ </body>
+</html>
