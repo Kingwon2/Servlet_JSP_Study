@@ -16,18 +16,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
-
+// main.html ì—ì„œ ë°›ì€ ì´ë¯¸ì§€ íŒŒì¼ì„ í´ë¼ì´ì–¸íŠ¸ì˜ ìš”ì²­ì— ë§ê²Œ reSize í˜¹ì€ grayScale ì ìš© í›„ í´ë¼ì´ì–¸íŠ¸ ë¡œì»¬ì— ë‹¤ì‹œ ì €ì¥í•˜ê³  ë³€ê²½ëœ
+//ì´ë¯¸ì§€ì˜ ëª¨ìŠµì„ out.print ë¡œ ë³´ì—¬ì¤€ë‹¤.
+// editImageë©”ì†Œë“œê°€ ìš”ì²­í•œ ì •ë³´ë¥¼ ë§¤ê²Œë³€ìˆ˜ë¡œ ë°›ì•„ì„œ ì‚¬ì§„ì„ í¸ì§‘í•´ì¤€ë‹¤.
 @MultipartConfig(location = "C:/test")
 @WebServlet("/input")
 public class main extends HttpServlet {
-	String origin_Location = "C:/test/test.jpg";  // ¿øº» ÆÄÀÏ ÀúÀåÇÒ Àå¼Ò
-	String target_Location = "C:/test/changed_image.jpg";  // ÆíÁıÇÑ ÆÄÀÏ ÀúÀåÇÒ Àå¼Ò
+	String origin_Location = "C:/test/test.jpg";  // ì›ë³¸ íŒŒì¼ ì €ì¥í•  ì¥ì†Œ
+	String target_Location = "C:/test/changed_image.jpg";  // í¸ì§‘í•œ íŒŒì¼ ì €ì¥í•  ì¥ì†Œ
     public main() {
         super();
         // TODO Auto-generated constructor stub
     }
     public void init(ServletConfig config) throws ServletException {
-		System.out.print("init ¸Ş¼Òµå È£Ãâ");
+		System.out.print("init ë©”ì†Œë“œ í˜¸ì¶œ");
 	}
 
 
@@ -48,7 +50,7 @@ public class main extends HttpServlet {
 	        g.drawImage(resizeImage, 0, 0, null);
 	        g.dispose();
 	        ImageIO.write(newImage, format, new File(target_Location));	
-	        System.out.print("¼öÁ¤¿Ï·á");
+	        System.out.print("ìˆ˜ì •ì™„ë£Œ");
 		}
 		catch (Exception e){
             e.printStackTrace();
@@ -62,34 +64,34 @@ public class main extends HttpServlet {
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
-		int width = Integer.parseInt(request.getParameter("width"));    //width ÃßÃâ
-		int height = Integer.parseInt(request.getParameter("height"));  //height ÃßÃâ
-		boolean is_Gray = (request.getParameter("box") != null)? true : false;  // Ã¼Å©¹Ú½º È®ÀÎ
+		int width = Integer.parseInt(request.getParameter("width"));    //width ì¶”ì¶œ
+		int height = Integer.parseInt(request.getParameter("height"));  //height ì¶”ì¶œ
+		boolean is_Gray = (request.getParameter("box") != null)? true : false;  // ì²´í¬ë°•ìŠ¤ í™•ì¸
 
-		Part part = request.getPart("image");           //ÀÌ¹ÌÁö ÆÄÀÏÀ» part º¯¼ö¿¡ ´ãÀ½
+		Part part = request.getPart("image");           //ì´ë¯¸ì§€ íŒŒì¼ì„ part ë³€ìˆ˜ì— ë‹´ìŒ
 		String fileName = part.getSubmittedFileName();
-		String format = (fileName.split("[.]"))[1];          // Æ÷¸ä Çü½Ä ÃßÃâ
+		String format = (fileName.split("[.]"))[1];          // í¬ë©§ í˜•ì‹ ì¶”ì¶œ
 
 
-		part.write("test.jpg");    // Å¬¶óÀÌ¾ğÆ®°¡ º¸³½ ÆÄÀÏÀ» ÀúÀå
-		System.out.println("º¹Á¦¿Ï·á");
-		editImage(width,height,is_Gray, format);         // ÆíÁı ½ÇÇà 
+		part.write("test.jpg");    // í´ë¼ì´ì–¸íŠ¸ê°€ ë³´ë‚¸ íŒŒì¼ì„ ì €ì¥
+		System.out.println("ë³µì œì™„ë£Œ");
+		editImage(width,height,is_Gray, format);         // í¸ì§‘ ì‹¤í–‰ 
 		
 		
 		
 		String data = "<html>";
 		data += "<head>";
 		data += "<meta charset=\"UTF-8\">";
-		data += "<title>ÀÌ¹ÌÁö ÆíÁı</title>";
+		data += "<title>ì´ë¯¸ì§€ í¸ì§‘</title>";
 		data += "<style>";
 		data += "h2 { text-align : center;}";
 		data += ".reset_button { width : 100px; height : 20px;}";
 		data += "</style>";
 		data += "</head>";
 		data += "<body>";
-		data += "<h2> ¼öÁ¤µÈ ÀÌ¹ÌÁö </h2> <hr>";
+		data += "<h2> ìˆ˜ì •ëœ ì´ë¯¸ì§€ </h2> <hr>";
 		data += "<img src=\"C:/test/changed_image.jpg\"><br><br>";
-		data += "<button type=\"button\" class=\"reset_button\" onclick=\"location.href='main.html' \">Ã³À½À¸·Î</button>";
+		data += "<button type=\"button\" class=\"reset_button\" onclick=\"location.href='main.html' \">ì²˜ìŒìœ¼ë¡œ</button>";
 		data += "</body>";
 		out.print(data);
 		
