@@ -8,7 +8,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <jsp:useBean id="m" class="tb.MemberBean"/>
-
+// MemberDAO 는 DB연결을 위한 클래스입니다. 
+// MemberBean은 DB데이터를 담는 클래스입니다.
+// join.html 은 DB정보를 추가하기 위한 가입 웹 html문서입니다.
+// EditTable.jsp는 ViewTable.jsp에서 요청한 DB데이터 변경작업 혹은 검색 작업을 수행합니다.
+// ViewTable.jsp는 EdiatTable.jsp에서 가공한 DB정보를 받아와서 내용을 출력합니다.
+// 체크박스를 통해 원하는 데이터를 선택해서 데이터를 한꺼번에 처리 할 수 있습니다.
+// 자바스크립트 문은 여러 데이터를 한꺼번에 삭제와, 수정작업하기 위해 작성했습니다. 
 <script language="javascript">
 				function search(){
 				var keyword = document.getElementById("keyword"); 
