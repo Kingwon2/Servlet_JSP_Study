@@ -11,7 +11,11 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+// MemberDAO 는 DB연결을 위한 클래스입니다. 
+// MemberBean은 DB데이터를 담는 클래스입니다.
+// MemberServlet.java에서 가공한 DB정보를 ViewServlet.java에 가져와서 최종적으로 출력을 합니다.
+// 체크박스를 통해 원하는 데이터를 선택해서 데이터를 한꺼번에 처리 할 수 있습니다.
+// 자바스크립트 문은 여러 데이터를 한꺼번에 삭제와, 수정작업하기 위해 작성했습니다. 
 @WebServlet("/viewMembers")
 public class ViewServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request,HttpServletResponse response)
@@ -91,13 +95,13 @@ public class ViewServlet extends HttpServlet {
 				"</script>");		
 		out.print("<body>");
 		out.print("<select id=\"keyword\">\r\n" + 
-				"    <option value=\"bookname\">å �̸�</option>\r\n" + 
-				"    <option value=\"publisher\">���ǻ�</option>\r\n" + 
+				"    <option value=\"bookname\">책 이름</option>\r\n" + 
+				"    <option value=\"publisher\">출판사</option>\r\n" + 
 				"</select>");
 		out.print("<input type=\"text\" id=\"target\">");
-		out.print("<input type=\"button\" name=\"search\" value=\"�˻�\"  onclick=\"search()\"> ��ü�˻��� @@@@ �Է��ϼ���.");
+		out.print("<input type=\"button\" name=\"search\" value=\"검색\"  onclick=\"search()\"> 전체검색시 @@@@ 입력하세요.");
 		out.print("<table border=1><tr align='center' bgcolor='lightgreen'>");
-		out.print("<td>å��ȣ</td><td>�̸�</td><td>���ǻ�</td><td>����</td></tr>");
+		out.print("<td>책번호</td><td>이름</td><td>출판사</td><td>가격</td></tr>");
 		for (int i = 0; i < membersList.size(); i++) {
 			MemberVO memberVO = (MemberVO) membersList.get(i);
 			int id = memberVO.getId();
@@ -108,8 +112,8 @@ public class ViewServlet extends HttpServlet {
 		}
 		out.print("</table></body></html>");
 		out.print("<br>" + 
-				"		<input type=\"button\" value=\"����\" onclick='edit()'>\r\n" + 
-				"		<input type=\"button\" value=\"����\" onclick='del()'>\r\n" + 
+				"		<input type=\"button\" value=\"수정\" onclick='edit()'>\r\n" + 
+				"		<input type=\"button\" value=\"삭제\" onclick='del()'>\r\n" + 
 				"		<form id=\"frm\" encType=\"UTF-8\">\r\n" + 
 				"		<input type=\"hidden\" id=\"cmd\" name=\"command\" >\r\n" + 
 				"		<input type=\"hidden\" id=\"id_list\" name=\"id_list\" >\r\n" + 
@@ -117,6 +121,6 @@ public class ViewServlet extends HttpServlet {
 				"		<input type=\"hidden\" id=\"publisher_list\" name=\"publisher_list\" >\r\n" + 
 				"		<input type=\"hidden\" id=\"price_list\" name=\"price_list\" >\r\n" + 
 				"		</form>");
-		out.print("<a href='memberForm.html'>�� ���� ����ϱ�</a");
+		out.print("<a href='memberForm.html'>새 도서 등록하기</a");
 	}
 }
