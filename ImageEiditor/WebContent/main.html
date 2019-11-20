@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<script type=text/javascript>
+		 function validate(){
+			 var frm = document.frm;
+			 var val_img = frm.image.value;
+			 var val_width = document.getElementById('wi',10).value;       
+			 var val_height = document.getElementById('he',10).value;
+
+			 if (val_img==""){
+				 alert("이미지 파일을 첨부하세요.");
+			 }
+			 else if(!(50<=val_width && val_width<=1000 && 50<=val_height && val_height<=1000) ){
+				 alert("가로, 세로의 값을 올바르게 입력하세요.");
+			 }
+			 else{
+				 frm.action = "input";
+				 frm.method = "post";
+				 frm.submit();
+			 }
+			 
+		 }
+		</script>
+		<title>이미지파일 수정하기</title>
+		
+		<style>
+		.red { color : red; }
+		.s { font-size : smaller;}
+		.manual{ font-size : 15px;}
+		h2 { text-align : center;}
+		.submit_button { width : 100px; height : 20px;}
+		</style>
+		
+	</head>
+	
+	<body>
+		<h2> 이미지 편집기 </h2>
+		<hr></hr>
+		<form name="frm" method="post" action="main.html" enctype="multipart/form-data">
+			<label for="img">Photo</label><br>
+			<input name="image" type="file"  id="img" accept="image/*" ><br><br>
+			가로(범위 : <span class="red">(50~1000)</span>)
+			<input type="number" id="wi" name = "width" min="50" max="1000" ><br><br>
+			세로(범위 : <span class="red">(50~1000)</span>)
+			<input type="number" id="he" name = "height" min="50" max="1000" ><br><br>
+			
+			<span class="s">회색조 적용</span><input type="checkbox" name="box" value="grayscale"><br><br>
+			
+			<input type="button" class="submit_button" onClick="validate()" value="변경하기"><hr>
+			사용법<ol class="manual">
+			 <li> 내 PC의 C드라이브로 들어간다.</li>
+			 <li> C드라이브에 test라는 이름의 디렉토리를 하나 생성한다.</li>
+			 <li> 이미지 편집기에서 찾아보기 버튼을 통해 편집할 이미지를 불러온다.</li>
+			 <li> 편집할 내용을 속성 값에 맞게 입력 후 변경하기 버튼을 누른다.</li>
+			 <li> 앞서 만든 test라는 디렉토리에 원본 이미지와 편집된 이미지가 들어가게 될 것이다.</li>
+			</ol> 
+		</form>
+	</body>
+
+</html>
